@@ -78,7 +78,15 @@ ip-172-20-56-3.ec2.internal	node	True
 
 Your cluster cy235.k8s.local is ready
 ```
-Note: If you ignore the message Cluster is starting. It should be ready in a few minutes. and validate too early, you’ll get an error. Wait a little longer for the nodes to launch, and the validate step will return without error.
+Note: The Cluster should be ready in a few minutes. If you validate too early, you’ll get an error. 
+```
+$ kops validate cluster
+Validating cluster cy235.k8s.local
+
+
+unexpected error during validation: error listing nodes: Get https://api-cy235-k8s-local-fl5vth-2032235046.us-east-1.elb.amazonaws.com/api/v1/nodes: EOF
+```
+Wait a little longer for the nodes to launch, and the validate step will return without error.
 
 Finally, you can see your Kubernetes nodes with kubectl:
 ```
