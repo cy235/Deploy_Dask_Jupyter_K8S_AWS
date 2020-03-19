@@ -88,7 +88,16 @@ ip-172-20-33-220.ec2.internal   Ready    master   32m   v1.16.7
 ip-172-20-49-54.ec2.internal    Ready    node     31m   v1.16.7
 ip-172-20-56-3.ec2.internal     Ready    node     31m   v1.16.7
 ```
+
+When cluster is created, we can login the AWS to EC2s, Auto scaling groups and Load balancers
+EC2s
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/EC2.jpg)
+
+Auto scaling groups
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/auto scaling group.jpg)
+
+Load balancers
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/load balancer.jpg)
 
 ### Kubernetes Dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
@@ -109,11 +118,15 @@ At this point, you’ll be prompted for a username and password. The username is
 ```
 $ kops get secrets kube --type secret -oplaintext
 ```
-After you log in, you’ll see another prompt. Select Token. To get the Token, type:
+After you log in, you’ll see another prompt. 
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard_login.jpg)
+
+Select Token. To get the Token, type:
 ```
 $ kops get secrets admin --type secret -oplaintext
 ```
 After typing in the token, you’ll see the Dashboard!
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard.jpg)
 
 ### Delete the Kubernetes Cluster
 When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
@@ -165,7 +178,11 @@ Notice that the EXTERNAL-IP displays hex values. These refer to AWS ELB (Elastic
 http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/
 ```
 ### Jupyter Server
-Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. Recall the default password is: dask.
+Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. 
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/dask_login.jpg)
+
+Recall the default password is: dask. Now we login Dask:
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/dask.jpg)
 
 The notebooks include lots of useful information, such as:
 
