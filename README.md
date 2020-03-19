@@ -108,7 +108,7 @@ The --yes argument is required to delete the cluster. Otherwise, Kubernetes will
 ### Install Helm
 First, let’s install Helm, the Kubernetes package manager. On Mac OS X, we’ll use brew to install. If you’re on another platform, check out the Helm docs.
 
-Go to <https://github.com/helm/helm/releases>, download Helm v2.x.x (DO NOT download v3.x.x because `helm init` doesn't work for v3.x.x ), for Mac OS, put the helm file in the 
+Go to <https://github.com/helm/helm/releases>, download Helm v2.x.x (DO NOT download v3.x.x because `helm init` doesn't work for v3.x.x ), for Mac OS X, put the helm file in the 
 ```
 /usr/local/bin/ 
 ```
