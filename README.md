@@ -1,7 +1,7 @@
 # Deploy Dask and Jupyter into kubernetes cluster in Amazon Web Services
 In this project, I will deploy dask and jupyter into kubernetes (k8s) cluster in Amazon Web Services (AWS)
 
-## Set up a kubernetes cluster in AWS
+## Set Up a Kubernetes Cluster in AWS
 ### Prerequisites
 Before setting up the Kubernetes cluster, you’ll need an AWS account and an installation of the AWS Command Line Interface.
 
@@ -19,7 +19,7 @@ On Mac OS X, we’ll use brew to install.
 $ brew update && brew install kops kubectl
 ```
 
-### Set up the k8s cluster
+### Set Up the Kubernetes Cluster
 The first thing we need to do is create an S3 bucket for kops to use to store the state of the Kubernetes cluster and its configuration. We’ll use the bucket name cy235-kops-state-store
 ```
 $ aws s3api create-bucket --bucket ramhiser-kops-state-store --region us-east-1
@@ -72,7 +72,7 @@ ip-172-20-40-70.ec2.internal   Ready    master   178m   v1.16.7
 ip-172-20-55-98.ec2.internal   Ready    node     177m   v1.16.7
 Chens-MacBook-Pro:~ chenyi$ 
 ```
-## Kubernetes dashboard
+### Kubernetes Dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
 
 To deploy Dashboard, execute following command:
@@ -97,15 +97,15 @@ $ kops get secrets admin --type secret -oplaintext
 ```
 After typing in the token, you’ll see the Dashboard!
 
-## Delete the Kubernetes Cluster
+### Delete the Kubernetes Cluster
 When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
 ```
 $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
-# Deploy Dask and Jupyter to a Kubernetes Cluster
-## Install Helm
+## Deploy Dask and Jupyter to a Kubernetes Cluster
+### Install Helm
 First, let’s install Helm, the Kubernetes package manager. On Mac OS X, we’ll use brew to install. If you’re on another platform, check out the Helm docs.
 
 Go to <https://github.com/helm/helm/releases>, download Helm v2.x.x (DO NOT download v3.x.x because `helm init` doesn't work for v3.x.x ), for Mac OS, put the helm file in the 
@@ -118,7 +118,7 @@ $ helm init
 ```
 Once you’ve initialized Helm, you should see this message: Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
 
-## Install Dask
+### Install Dask
 Next, we’re going to install a Dask chart. [Kubernetes Charts](https://github.com/helm/charts) are curated application definitions for Helm. To install the Dask chart, we’ll update the known Charts channels before installing the stable version of Dask.
 
 ```
@@ -129,7 +129,7 @@ $ helm repo update
 $ helm install stable/dask
 ```
 
-## Determine AWS DNS Entry
+### Determine AWS DNS Entry
 Before we’re able to work with our deployed Jupyter server, we need to determine the URL. To do this, let’s start by listing all services in the namespace:
 ```
 $ kubectl get services
@@ -142,7 +142,7 @@ Notice that the EXTERNAL-IP displays hex values. These refer to AWS ELB (Elastic
 ```
 http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/
 ```
-## Jupyter Server
+### Jupyter Server
 Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. Recall the default password is: dask.
 
 The notebooks include lots of useful information, such as:
@@ -151,7 +151,7 @@ Parallelizing Python code with Dask
 Using Dask futures
 Parallelizing Pandas operations with Dask dataframes
 
-## Disable Jupyter Server
+### Disable Jupyter Server
 If you decide you’d rather run Dask only without Jupyter, that’s easy to do. Simply update the config YAML with:
 ```
 jupyter:
