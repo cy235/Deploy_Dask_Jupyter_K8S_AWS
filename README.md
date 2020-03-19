@@ -88,6 +88,8 @@ ip-172-20-33-220.ec2.internal   Ready    master   32m   v1.16.7
 ip-172-20-49-54.ec2.internal    Ready    node     31m   v1.16.7
 ip-172-20-56-3.ec2.internal     Ready    node     31m   v1.16.7
 ```
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/EC2.jpg)
+
 ### Kubernetes Dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
 
