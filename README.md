@@ -61,3 +61,16 @@ ip-172-20-55-98.ec2.internal	node	True
 
 Your cluster cy235.k8s.local is ready
 ```
+Note: If you ignore the message Cluster is starting. It should be ready in a few minutes. and validate too early, you’ll get an error. Wait a little longer for the nodes to launch, and the validate step will return without error.
+
+Finally, you can see your Kubernetes nodes with kubectl:
+```
+ kubectl get nodes
+NAME                           STATUS   ROLES    AGE    VERSION
+ip-172-20-40-5.ec2.internal    Ready    node     177m   v1.16.7
+ip-172-20-40-70.ec2.internal   Ready    master   178m   v1.16.7
+ip-172-20-55-98.ec2.internal   Ready    node     177m   v1.16.7
+Chens-MacBook-Pro:~ chenyi$ 
+```
+## Kubernetes dashboard
+Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
