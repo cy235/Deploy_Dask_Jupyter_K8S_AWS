@@ -89,15 +89,16 @@ ip-172-20-49-54.ec2.internal    Ready    node     31m   v1.16.7
 ip-172-20-56-3.ec2.internal     Ready    node     31m   v1.16.7
 ```
 
-When cluster is created, we can login the AWS to EC2s, Auto scaling groups and Load balancers
+When cluster is created, we can login the AWS to EC2s, Auto scaling groups and Load balancers in the following:
+
 EC2s
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/EC2.jpg)
 
 Auto scaling groups
-![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/auto scaling group.jpg)
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/auto_scaling_group.jpg)
 
 Load balancers
-![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/load balancer.jpg)
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/load_balancer.jpg)
 
 ### Kubernetes Dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
