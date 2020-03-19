@@ -154,9 +154,9 @@ Before we’re able to work with our deployed Jupyter server, we need to determi
 ```
 $ kubectl get services
 NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)                       AGE
-kindled-skunk-dask-jupyter     LoadBalancer   100.65.190.185   ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com    80:30715/TCP                  9m49s
-kindled-skunk-dask-scheduler   LoadBalancer   100.65.198.224   a9730d96b3848471fafb73b38e2e1908-1350744166.us-east-1.elb.amazonaws.com   8786:32617/TCP,80:30193/TCP   9m49s
-kubernetes                     ClusterIP      100.64.0.1       <none>                                                                    443/TCP                       28m
+kindled-skunk-dask-jupyter     LoadBalancer   100.65.190.185   ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com    80:30715/TCP                  17m
+kindled-skunk-dask-scheduler   LoadBalancer   100.65.198.224   a9730d96b3848471fafb73b38e2e1908-1350744166.us-east-1.elb.amazonaws.com   8786:32617/TCP,80:30193/TCP   17m
+kubernetes                     ClusterIP      100.64.0.1       <none>                                                                    443/TCP                       36m
 ```
 Notice that the EXTERNAL-IP displays hex values. These refer to AWS ELB (Elastic Load Balancer) entries you can find in your AWS console: EC2 -> Load Balancers. You can get the exposed DNS entry by matching the EXTERNAL-IP to the appropriate load balancer. For instance, the screenshot below shows that the DNS entry for the Jupyter node is 
 ```
