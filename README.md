@@ -128,3 +128,32 @@ $ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templ
 $ helm repo update
 $ helm install stable/dask
 ```
+
+## Determine AWS DNS Entry
+Before we’re able to work with our deployed Jupyter server, we need to determine the URL. To do this, let’s start by listing all services in the namespace:
+```
+$ kubectl get services
+NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)                       AGE
+kubernetes                        ClusterIP      100.64.0.1      <none>                                                                    443/TCP                       3h31m
+wrinkled-gorilla-dask-jupyter     LoadBalancer   100.66.153.76   a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com    80:32673/TCP                  70m
+wrinkled-gorilla-dask-scheduler   LoadBalancer   100.69.176.77   a4d50878359694adcb0282c8ae2a7a40-1638779315.us-east-1.elb.amazonaws.com   8786:31561/TCP,80:30368/TCP   70m
+```
+Notice that the EXTERNAL-IP displays hex values. These refer to AWS ELB (Elastic Load Balancer) entries you can find in your AWS console: EC2 -> Load Balancers. You can get the exposed DNS entry by matching the EXTERNAL-IP to the appropriate load balancer. For instance, the screenshot below shows that the DNS entry for the Jupyter node is 
+```
+http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/
+```
+## Jupyter Server
+Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. Recall the default password is: dask.
+
+The notebooks include lots of useful information, such as:
+
+Parallelizing Python code with Dask
+Using Dask futures
+Parallelizing Pandas operations with Dask dataframes
+
+## Disable Jupyter Server
+If you decide you’d rather run Dask only without Jupyter, that’s easy to do. Simply update the config YAML with:
+```
+jupyter:
+  enabled: false
+```
