@@ -37,7 +37,7 @@ Note: this line doesn’t launch the AWS EC2 instances. It simply creates the co
 ```
 $ kops edit cluster
 ```
-Now that we’ve generated a cluster configuration, we can edit its description before launching the instances. The config is loaded from s3://ramhiser-kops-state-store. You can change the editor used to edit the config by setting $EDITOR or $KUBE_EDITOR. For instance, in my ~/.bashrc, I have export KUBE_EDITOR=cy235.
+Now that we’ve generated a cluster configuration, we can edit its description before launching the instances. The config is loaded from s3://cy235-kops-state-store. You can change the editor used to edit the config by setting $EDITOR or $KUBE_EDITOR. For instance, in my ~/.bashrc, I have export KUBE_EDITOR=cy235.
 
 Time to build the cluster. This takes a few minutes to boot the EC2 instances and download the Kubernetes components.
 ```
