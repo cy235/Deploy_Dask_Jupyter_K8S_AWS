@@ -16,7 +16,7 @@ Default output format [None]: json
 ### Install kops + kubectl
 On Mac OS X, we’ll use brew to install.
 ```
-brew update && brew install kops kubectl
+$ brew update && brew install kops kubectl
 ```
 
 ### Set up the k8s cluster
@@ -26,8 +26,8 @@ $ aws s3api create-bucket --bucket ramhiser-kops-state-store --region us-east-1
 ```
 Before creating the cluster, let’s set two environment variables: KOPS_CLUSTER_NAME and KOPS_STATE_STORE. For safe keeping you should add the following to your ~/.bash_profile or ~/.bashrc configs (or whatever the equivalent is if you don’t use bash).
 ```
-export KOPS_CLUSTER_NAME=cy235.k8s.local
-export KOPS_STATE_STORE=s3://cy235-kops-state-store
+$ export KOPS_CLUSTER_NAME=cy235.k8s.local
+$ export KOPS_STATE_STORE=s3://cy235-kops-state-store
 ```
 Now, to generate the cluster configuration:
 ```
@@ -41,7 +41,7 @@ Now that we’ve generated a cluster configuration, we can edit its description 
 
 Time to build the cluster. This takes a few minutes to boot the EC2 instances and download the Kubernetes components.
 ```
-kops update cluster --name ${KOPS_CLUSTER_NAME} --yes
+$ kops update cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 After waiting a bit (5~10 minutes), let’s validate the cluster to ensure the master + 2 nodes have launched.
 ```
@@ -65,7 +65,7 @@ Note: If you ignore the message Cluster is starting. It should be ready in a few
 
 Finally, you can see your Kubernetes nodes with kubectl:
 ```
- kubectl get nodes
+$ kubectl get nodes
 NAME                           STATUS   ROLES    AGE    VERSION
 ip-172-20-40-5.ec2.internal    Ready    node     177m   v1.16.7
 ip-172-20-40-70.ec2.internal   Ready    master   178m   v1.16.7
@@ -85,7 +85,7 @@ $ kubectl proxy
 ```
 Now access Dashboard at:
 ```
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+<http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
 ```
 At this point, you’ll be prompted for a username and password. The username is admin. To get the password at the CLI, type:
 ```
@@ -93,15 +93,19 @@ $ kops get secrets kube --type secret -oplaintext
 ```
 After you log in, you’ll see another prompt. Select Token. To get the Token, type:
 ```
-kops get secrets admin --type secret -oplaintext
+$ kops get secrets admin --type secret -oplaintext
 ```
 After typing in the token, you’ll see the Dashboard!
 
 ## Delete the Kubernetes Cluster
 When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
 ```
-kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
+$ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
 # Deploy Dask and Jupyter to a Kubernetes Cluster
+## Install Helm
+First, let’s install Helm, the Kubernetes package manager. On Mac OS X, we’ll use brew to install. If you’re on another platform, check out the Helm docs.
+
+go to <https://github.com/helm/helm/releases>
