@@ -108,4 +108,12 @@ The --yes argument is required to delete the cluster. Otherwise, Kubernetes will
 ## Install Helm
 First, let’s install Helm, the Kubernetes package manager. On Mac OS X, we’ll use brew to install. If you’re on another platform, check out the Helm docs.
 
-go to <https://github.com/helm/helm/releases>
+Go to <https://github.com/helm/helm/releases>, download Helm v2.x.x (DO NOT download v3.x.x because `helm init` doesn't work for v3.x.x ), for Mac OS, put the helm file in the 
+```
+/usr/local/bin/ 
+```
+Then
+```
+helm init
+```
+Once you’ve initialized Helm, you should see this message: Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
