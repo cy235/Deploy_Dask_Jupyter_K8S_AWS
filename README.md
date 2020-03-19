@@ -139,7 +139,11 @@ Next, we’re going to install a Dask chart. [Kubernetes Charts](https://github.
 ```
 $ kubectl create serviceaccount --namespace kube-system tiller
 $ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-$ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}' $ helm init --service-account tiller --upgrade
+$ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}' 
+```
+Let’s install Dask.
+```
+$ helm init --service-account tiller --upgrade
 $ helm repo update
 $ helm install stable/dask
 ```
