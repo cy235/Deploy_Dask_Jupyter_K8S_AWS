@@ -33,6 +33,21 @@ Now, to generate the cluster configuration:
 ```
 $ kops create cluster --node-count=2 --node-size=t2.medium --zones=us-east-1a
 ```
+you may encounter:
+```
+$ kops create cluster --node-count=2 --node-size=t2.medium --zones=us-east-1a
+I0318 22:59:06.019860   23964 create_cluster.go:562] Inferred --cloud=aws from zone "us-east-1a"
+I0318 22:59:06.162553   23964 subnets.go:184] Assigned CIDR 172.20.32.0/19 to subnet us-east-1a
+Previewing changes that will be made:
+
+
+SSH public key must be specified when running with AWS (create with `kops create secret --name cy235.k8s.local sshpublickey admin -i ~/.ssh/id_rsa.pub`)
+```
+In order solve above problem, I execute the following commands:
+```
+$ ssh-keygen -t rsa -f ./cluster.fayzlab.com
+$ kops create secret sshpublickey admin -i ~/.ssh/cluster.cy235.com.pub  --state s3://cy235-kops-state-store
+```
 Note: this line doesn’t launch the AWS EC2 instances. It simply creates the configuration and writes to the s3://cy235-kops-state-store bucket we created above. In our example, we’re creating 2 t2.medium EC2 work nodes in addition to a c4.large master instance (default).
 ```
 $ kops edit cluster
