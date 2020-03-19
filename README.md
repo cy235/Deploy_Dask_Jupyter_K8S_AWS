@@ -24,7 +24,7 @@ The first thing we need to do is create an S3 bucket for kops to use to store th
 ```
 $ aws s3api create-bucket --bucket cy235-kops-state-store --region us-east-1
 ```
-Before creating the cluster, let’s set two environment variables: KOPS_CLUSTER_NAME and KOPS_STATE_STORE. For safe keeping you should add the following to your ~/.bash_profile or ~/.bashrc configs (or whatever the equivalent is if you don’t use bash).
+Before creating the cluster, let’s set two environment variables: `KOPS_CLUSTER_NAME` and `KOPS_STATE_STORE`. For safe keeping you should add the following to your `~/.bash_profile` or `~/.bashrc` configs (or whatever the equivalent is if you don’t use bash).
 ```
 $ export KOPS_CLUSTER_NAME=cy235.k8s.local
 $ export KOPS_STATE_STORE=s3://cy235-kops-state-store
@@ -48,11 +48,11 @@ In order solve above problem, I execute the following commands:
 $ ssh-keygen -t rsa -f ./cluster.fayzlab.com
 $ kops create secret sshpublickey admin -i ~/.ssh/cluster.cy235.com.pub  --state s3://cy235-kops-state-store
 ```
-Note: this line doesn’t launch the AWS EC2 instances. It simply creates the configuration and writes to the s3://cy235-kops-state-store bucket we created above. In our example, we’re creating 2 t2.medium EC2 work nodes in addition to a c4.large master instance (default).
+Note: this line doesn’t launch the AWS EC2 instances. It simply creates the configuration and writes to the `s3://cy235-kops-state-store` bucket we created above. In our example, we’re creating 2 t2.medium EC2 work nodes in addition to a c4.large master instance (default).
 ```
 $ kops edit cluster
 ```
-Now that we’ve generated a cluster configuration, we can edit its description before launching the instances. The config is loaded from s3://cy235-kops-state-store. You can change the editor used to edit the config by setting $EDITOR or $KUBE_EDITOR. For instance, in my ~/.bashrc, I have export KUBE_EDITOR=cy235.
+Now that we’ve generated a cluster configuration, we can edit its description before launching the instances. The config is loaded from `s3://cy235-kops-state-store`. You can change the editor used to edit the config by setting `$EDITOR` or `$KUBE_EDITOR`. For instance, in my `~/.bashrc`, I have export `KUBE_EDITOR=cy235`.
 
 Time to build the cluster. This takes a few minutes to boot the EC2 instances and download the Kubernetes components.
 ```
