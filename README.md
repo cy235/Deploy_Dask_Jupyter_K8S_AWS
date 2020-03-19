@@ -190,6 +190,8 @@ http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/
 Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. 
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/dask_login.jpg)
 
+Wait patiently if above interface does not show !
+
 Recall the default password is: dask. Now we login Dask:
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/dask.jpg)
 
