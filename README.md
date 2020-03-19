@@ -74,3 +74,16 @@ Chens-MacBook-Pro:~ chenyi$
 ```
 ## Kubernetes dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
+
+To deploy Dashboard, execute following command:
+```
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc6/aio/deploy/recommended.yaml
+```
+To access Dashboard from your local workstation you must create a secure channel to your Kubernetes cluster. Run the following command:
+```
+$ kubectl proxy
+```
+Now access Dashboard at:
+```
+(http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)
+```
