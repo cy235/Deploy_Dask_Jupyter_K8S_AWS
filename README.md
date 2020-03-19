@@ -61,6 +61,8 @@ $ kops update cluster --name ${KOPS_CLUSTER_NAME} --yes
 After waiting a bit (5~10 minutes), let’s validate the cluster to ensure the master + 2 nodes have launched.
 ```
 $ kops validate cluster
+Using cluster from kubectl context: cy235.k8s.local
+
 Validating cluster cy235.k8s.local
 
 INSTANCE GROUPS
@@ -70,9 +72,9 @@ nodes			Node	t2.medium	2	2	us-east-1a
 
 NODE STATUS
 NAME				ROLE	READY
-ip-172-20-40-5.ec2.internal	node	True
-ip-172-20-40-70.ec2.internal	master	True
-ip-172-20-55-98.ec2.internal	node	True
+ip-172-20-33-220.ec2.internal	master	True
+ip-172-20-49-54.ec2.internal	node	True
+ip-172-20-56-3.ec2.internal	node	True
 
 Your cluster cy235.k8s.local is ready
 ```
@@ -81,11 +83,10 @@ Note: If you ignore the message Cluster is starting. It should be ready in a few
 Finally, you can see your Kubernetes nodes with kubectl:
 ```
 $ kubectl get nodes
-NAME                           STATUS   ROLES    AGE    VERSION
-ip-172-20-40-5.ec2.internal    Ready    node     177m   v1.16.7
-ip-172-20-40-70.ec2.internal   Ready    master   178m   v1.16.7
-ip-172-20-55-98.ec2.internal   Ready    node     177m   v1.16.7
-Chens-MacBook-Pro:~ chenyi$ 
+NAME                            STATUS   ROLES    AGE   VERSION
+ip-172-20-33-220.ec2.internal   Ready    master   32m   v1.16.7
+ip-172-20-49-54.ec2.internal    Ready    node     31m   v1.16.7
+ip-172-20-56-3.ec2.internal     Ready    node     31m   v1.16.7
 ```
 ### Kubernetes Dashboard
 Now, we have a working Kubernetes cluster deployed on AWS. At this point, we can deploy lots of applications, such as Dask and Jupyter. For demonstration, I will launch the [Kubernetes Dashboard](https://github.com/kubernetes/dashboard). Think UI instead of command line for managing Kubernetes clusters and applications.
@@ -152,17 +153,17 @@ $ helm install stable/dask
 Before we’re able to work with our deployed Jupyter server, we need to determine the URL. To do this, let’s start by listing all services in the namespace:
 ```
 $ kubectl get services
-NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)                       AGE
-kubernetes                        ClusterIP      100.64.0.1      <none>                                                                    443/TCP                       3h31m
-wrinkled-gorilla-dask-jupyter     LoadBalancer   100.66.153.76   a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com    80:32673/TCP                  70m
-wrinkled-gorilla-dask-scheduler   LoadBalancer   100.69.176.77   a4d50878359694adcb0282c8ae2a7a40-1638779315.us-east-1.elb.amazonaws.com   8786:31561/TCP,80:30368/TCP   70m
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)                       AGE
+kindled-skunk-dask-jupyter     LoadBalancer   100.65.190.185   ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com    80:30715/TCP                  9m49s
+kindled-skunk-dask-scheduler   LoadBalancer   100.65.198.224   a9730d96b3848471fafb73b38e2e1908-1350744166.us-east-1.elb.amazonaws.com   8786:32617/TCP,80:30193/TCP   9m49s
+kubernetes                     ClusterIP      100.64.0.1       <none>                                                                    443/TCP                       28m
 ```
 Notice that the EXTERNAL-IP displays hex values. These refer to AWS ELB (Elastic Load Balancer) entries you can find in your AWS console: EC2 -> Load Balancers. You can get the exposed DNS entry by matching the EXTERNAL-IP to the appropriate load balancer. For instance, the screenshot below shows that the DNS entry for the Jupyter node is 
 ```
-http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/
+http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/
 ```
 ### Jupyter Server
-Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://a398642b9978341e1a44a342bd8637ad-696680121.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. Recall the default password is: dask.
+Now that we have the DNS entry, let’s go to the Jupyter server in the browser at: http://ab607a07cd16241e2a27b8af5fae6fa2-814371222.us-east-1.elb.amazonaws.com/. The first thing you’ll see is a Jupyter password prompt. Recall the default password is: dask.
 
 The notebooks include lots of useful information, such as:
 
