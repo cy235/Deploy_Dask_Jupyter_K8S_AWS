@@ -1,5 +1,5 @@
 # Deploy Dask and Jupyter into kubernetes cluster in Amazon Web Services
-In this project, I will deploy dask and jupyter into kubernetes (k8s) cluster in Amazon Web Services (AWS)
+In this project, I will deploy dask and jupyter into kubernetes (k8s) cluster in Amazon Web Services (AWS). Dask is a flexible library for parallel computing in Python. Dask is composed of two parts: ... “Big Data” collections like parallel arrays, dataframes, and lists that extend common interfaces like NumPy, Pandas, or Python iterators to larger-than-memory or distributed environments.
 
 ## Set Up a Kubernetes Cluster in AWS
 ### Prerequisites
