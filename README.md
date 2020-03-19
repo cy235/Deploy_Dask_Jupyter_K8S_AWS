@@ -84,9 +84,9 @@ To access Dashboard from your local workstation you must create a secure channel
 $ kubectl proxy
 ```
 Now access Dashboard at:
-```
+
 <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
-```
+
 At this point, you’ll be prompted for a username and password. The username is admin. To get the password at the CLI, type:
 ```
 $ kops get secrets kube --type secret -oplaintext
