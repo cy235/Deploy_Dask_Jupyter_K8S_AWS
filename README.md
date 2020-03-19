@@ -22,7 +22,7 @@ $ brew update && brew install kops kubectl
 ### Set Up the Kubernetes Cluster
 The first thing we need to do is create an S3 bucket for kops to use to store the state of the Kubernetes cluster and its configuration. We’ll use the bucket name cy235-kops-state-store
 ```
-$ aws s3api create-bucket --bucket ramhiser-kops-state-store --region us-east-1
+$ aws s3api create-bucket --bucket cy235-kops-state-store --region us-east-1
 ```
 Before creating the cluster, let’s set two environment variables: KOPS_CLUSTER_NAME and KOPS_STATE_STORE. For safe keeping you should add the following to your ~/.bash_profile or ~/.bashrc configs (or whatever the equivalent is if you don’t use bash).
 ```
