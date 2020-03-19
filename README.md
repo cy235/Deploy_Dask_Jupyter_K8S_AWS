@@ -87,3 +87,21 @@ Now access Dashboard at:
 ```
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
+At this point, you’ll be prompted for a username and password. The username is admin. To get the password at the CLI, type:
+```
+$ kops get secrets kube --type secret -oplaintext
+```
+After you log in, you’ll see another prompt. Select Token. To get the Token, type:
+```
+kops get secrets admin --type secret -oplaintext
+```
+After typing in the token, you’ll see the Dashboard!
+
+## Delete the Kubernetes Cluster
+When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
+```
+kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
+```
+The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
+
+# Deploy Dask and Jupyter to a Kubernetes Cluster
