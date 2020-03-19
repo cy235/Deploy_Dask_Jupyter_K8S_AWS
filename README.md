@@ -112,8 +112,19 @@ Go to <https://github.com/helm/helm/releases>, download Helm v2.x.x (DO NOT down
 ```
 /usr/local/bin/ 
 ```
-Then
+Then execute
 ```
-helm init
+$ helm init
 ```
 Once you’ve initialized Helm, you should see this message: Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
+
+## Install Dask
+Next, we’re going to install a Dask chart. [Kubernetes Charts](https://github.com/helm/charts) are curated application definitions for Helm. To install the Dask chart, we’ll update the known Charts channels before installing the stable version of Dask.
+
+```
+$ kubectl create serviceaccount --namespace kube-system tiller
+$ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+$ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}' $ helm init --service-account tiller --upgrade
+$ helm repo update
+$ helm install stable/dask
+```
