@@ -135,7 +135,7 @@ Select Token. To get the Token, type:
 $ kops get secrets admin --type secret -oplaintext
 ```
 After typing in the token, you’ll see the Dashboard!
-![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard.jpg)
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard0.jpg)
 
 ### Delete the Kubernetes Cluster
 When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
