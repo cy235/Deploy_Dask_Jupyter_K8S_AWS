@@ -135,7 +135,7 @@ Select Token. To get the Token, type:
 $ kops get secrets admin --type secret -oplaintext
 ```
 After typing in the token, you’ll see the Dashboard!
-![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard0.jpg)
+![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard.jpg)
 
 ### Delete the Kubernetes Cluster
 When you’re ready to tear down your Kubernetes cluster or if you messed up and need to start over, you can delete the cluster with a single command:
@@ -172,8 +172,6 @@ $ helm init --service-account tiller --upgrade
 $ helm repo update
 $ helm install stable/dask
 ```
-After the installation, the k8s Dashboard becomes
-![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/k8s_dashboard.jpg)
 
 ### Determine AWS DNS Entry
 Before we’re able to work with our deployed Jupyter server, we need to determine the URL. To do this, let’s start by listing all services in the namespace:
