@@ -45,8 +45,11 @@ SSH public key must be specified when running with AWS (create with `kops create
 ```
 In order solve above problem, I execute the following commands:
 ```
-$ ssh-keygen -t rsa -f ./cluster.fayzlab.com
 $ kops create secret sshpublickey admin -i ~/.ssh/cluster.cy235.com.pub  --state s3://cy235-kops-state-store
+```
+If you have not created the rsa key named `cluster.cy235.com` and `cluster.cy235.com.pub`, you can create them by executing
+```
+$ ssh-keygen -t rsa -f ~/.ssh/cluster.cy235.com 
 ```
 Note: this line doesn’t launch the AWS EC2 instances. It simply creates the configuration and writes to the `s3://cy235-kops-state-store` bucket we created above. In our example, we’re creating 2 t2.medium EC2 work nodes in addition to a c4.large master instance (default).
 ```
